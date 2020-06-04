@@ -6,7 +6,7 @@ import logging
 from selenium.webdriver.common.keys import Keys
 # import datetime
 
-class P02LoginLogoutCookie(BasePage):
+class P01LoginLogoutCookie(BasePage):
     log = cl.customLogger(logging.DEBUG)
 
     def __init__(self, driver):
@@ -94,6 +94,3 @@ class P02LoginLogoutCookie(BasePage):
         timeexpire = strftime('%Y-%m-%d %H:%M:%S', localtime(cookie['expiry']))
         print('COOKIE EXPIRY = ' + str(timeexpire))
         return cookie
-
-
-

@@ -1,6 +1,6 @@
 __author__ = 'cromox'
 
-from pages.p02mengkome.p02mengkomeloginout1 import P02LoginLogoutCookie
+from pages.p01mengkome.p01mengkomeloginout1 import P01LoginLogoutCookie
 from utilities.teststatus import TestStatus as tStatus
 from time import strptime, mktime
 import unittest
@@ -10,7 +10,7 @@ import logging
 import sys
 
 @pytest.mark.usefixtures("oneTimeSetUp", "setUp")
-class P02MengkomeLoginLogoutTests(unittest.TestCase):
+class P01MengkomeLoginLogoutTests(unittest.TestCase):
     log = cl.customLogger(logging.DEBUG)
     urlnow = ''
     cookie = {}
@@ -18,7 +18,7 @@ class P02MengkomeLoginLogoutTests(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def objectSetup(self):
-        self.mengkomepage = P02LoginLogoutCookie(self.driver)
+        self.mengkomepage = P01LoginLogoutCookie(self.driver)
         self.tstatus = tStatus(self.driver)
         print('\n--- >> SETUP')
         self.__class__.ix = self.__class__.ix + 1

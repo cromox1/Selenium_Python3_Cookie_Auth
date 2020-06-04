@@ -1,0 +1,82 @@
+penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome
+$ py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py > consoleoutput1.txt 2>&1
+
+penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome
+$ cat consoleoutput1.txt
+
+============================= test session starts =============================
+platform win32 -- Python 3.8.2, pytest-5.4.1, py-1.8.1, pluggy-0.13.1 -- c:\program files\python38\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\penggunabiasa\python3_projects\Selenium_Python3_Cookie_Auth
+collecting ... collected 3 items
+
+tests/p01mengkome/p01mengkomeloginout1_test1.py::P01MengkomeLoginLogoutTests::test1_login_mengkome_add_cookie_page 
+== > Running one time setUp
+Python Version = 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
+Browser version ( chrome ) = 83.0.4103.61
+
+--- >> SETUP
+
+--- > Running method level setUp
+
+1) -- >  test1_login_mengkome_add_cookie_page
+
+Result 1  =  True
+Result 2  =  True
+Result 3  =  True
+COOKIE [ mengkome.pythonanywhere.com ] = {'domain': 'mengkome.pythonanywhere.com', 'expiry': 1592475800, 'httpOnly': True, 'name': 'sessionid', 'path': '/', 'sameSite': 'Lax', 'secure': False, 'value': 'a396ka4dfsa499w9fo9g51mnat59ucsk'}
+COOKIE EXPIRY = 2020-06-18 11:23:20
+Result 4  =  True
+ResultLast = True
+CURRENT URL = https://mengkome.pythonanywhere.com/
+
+--- >> TEARDOWN
+PASSED
+--- > Running method level tearDown
+
+tests/p01mengkome/p01mengkomeloginout1_test1.py::P01MengkomeLoginLogoutTests::test2_relogin_bycookie_chkinfos 
+--- >> SETUP
+
+--- > Running method level setUp
+
+2) -- >  test2_relogin_bycookie_chkinfos
+
+MENGKOME_URL = https://mengkome.pythonanywhere.com/
+Result 1  =  True
+URL = https://mengkome.pythonanywhere.com/
+Name of the user = PEMBACA
+User email = xixa05@yahoo.co.uk
+User Joined date = Nov. 8, 2018, 2:08 p.m.
+Result 2  =  True
+Result 3  =  True
+ResultLast = True
+CURRENT URL = https://mengkome.pythonanywhere.com/admin/auth/user/2/change/
+
+--- >> TEARDOWN
+PASSED
+--- > Running method level tearDown
+
+tests/p01mengkome/p01mengkomeloginout1_test1.py::P01MengkomeLoginLogoutTests::test3_relogin_bycookie_logout 
+--- >> SETUP
+
+--- > Running method level setUp
+
+3) -- >  test3_relogin_bycookie_logout
+
+Current URL = https://mengkome.pythonanywhere.com/admin/auth/user/2/change/
+Result 1  =  True
+Result 2  =  True
+Result 3  =  True
+User bacaone successfully LOGGED OUT
+Result 4  =  True
+ResultLast = True
+CURRENT URL = https://mengkome.pythonanywhere.com/admin/logout/
+
+--- >> TEARDOWN
+PASSED
+--- > Running method level tearDown
+
+== > Running one time tearDown
+
+
+======================== 3 passed in 63.82s (0:01:03) =========================
