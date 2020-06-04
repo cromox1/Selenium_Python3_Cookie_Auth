@@ -1,7 +1,7 @@
 # Selenium_Python3_Cookie_Auth
 Selenium Automation with cookie authentication
 
-## MengKome (Rosli_Talib Django)
+## 1) MengKome (Rosli_Talib Django)
 ### https://mengkome.pythonanywhere.com/ 
 
 Assignment 1 (Test1) :
@@ -19,13 +19,13 @@ Assignment 1 (Test1) :
   - go back to home page
 - Logout - make sure now Cookie is expired or not usable anymore
 
-## 1) Basic UnitTest :
+## 1.1) Basic UnitTest :
 
 To run :
 
 ### python3 UnitTests/test2_login_logout_diffwindows_chromeopts_three.py
 
-## 2) pytest Automation Framework
+## 1.2) pytest Automation Framework
 
 MengKome Automation Framework consise these directories:
 
