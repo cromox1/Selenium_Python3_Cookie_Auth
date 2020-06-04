@@ -8,13 +8,13 @@ Assignment 1 (Test1) :
 
 - Go to main page https://mengkome.pythonanywhere.com/
 - Login (with test user - username / passwd = bacaone / qawsed123456 )
-- Logout and keep/save Cookie (make sure it's usable)
-- Relogin (automatically) mengkome (same page before logout) using Cookie
+- Close/Quit browser but keep/save Cookie (make sure it's usable)
+- Relogin (automatically) mengkome (same page before browser been closed) using Cookie
 - Check some infos inside 
   - go & click Users button
   - click at your username
   - check email address & date joined
-- Logout
+- Close/Quit browser again
 - Relogin again (automatically) using Cookie
   - go back to home page
 - Logout - make sure now Cookie is expired or not usable anymore
