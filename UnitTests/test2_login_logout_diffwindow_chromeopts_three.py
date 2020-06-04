@@ -103,7 +103,7 @@ class TestMengkome1(unittest.TestCase):
         print('User Joined date = ' + join1)
         self.__class__.mengkome_url = self.driver.current_url
 
-    def test_99_relogin_then_logout(self):
+    def test_90_relogin_then_logout(self):
         print('\n' + str(self.__class__.ixi) + ') ---->  ' + str(self._testMethodName) + '\n')
         user1 = self.__class__.user1
         urlone = self.__class__.mengkome_url
@@ -115,6 +115,23 @@ class TestMengkome1(unittest.TestCase):
         self.driver.find_element_by_xpath("//*[contains(text(), 'Log out')]").click()
         if self.driver.find_element_by_xpath("//*[@id='content']/h1").text == 'Logged out':
             print('User ' + user1 + ' successfully LOGGED OUT')
+
+    def test_99_cookie_notuseable(self):
+        print('\n' + str(self.__class__.ixi) + ') ---->  ' + str(self._testMethodName) + '\n')
+        urlone = self.__class__.mengkome_url
+        user1 = self.__class__.user1
+
+        self.driver.get(urlone)
+        print('CURRENT URL = ' + self.driver.current_url)
+        self.driver.add_cookie(self.__class__.cookie)
+        self.driver.get(urlone)
+        pagetitle = self.driver.title
+        print('TITLE = ' + str(pagetitle))
+        # not login anymore -- > Cookie is not usable
+        if 'Log in' in pagetitle:
+            print('User ' + user1 + ' is OUTSIDE the page - Cookie is UNUSABLE')
+        else:
+            print('User ' + user1 + ' look like inside - Cookie is USABLE')
 
     def tearDown(self):
         ## current URL before quit/exit
