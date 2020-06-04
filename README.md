@@ -7,7 +7,7 @@ Selenium Automation with cookie authentication
 Assignment 1 (Test1) :
 
 - Go to main page https://mengkome.pythonanywhere.com/
-- Login (with admin username / passwd = bacaone / qawsed123456 )
+- Login (with test user - username / passwd = bacaone / qawsed123456 )
 - Logout and keep/save Cookie (make sure it's usable)
 - Relogin (automatically) mengkome (same page before logout) using Cookie
 - Check some infos inside 
