@@ -24,7 +24,7 @@ class P01MengkomeLoginLogoutTests(unittest.TestCase):
         self.__class__.ix = self.__class__.ix + 1
 
     # @pytest.mark.run(order=1)
-    @pytest.mark.tryfirst
+    # @pytest.mark.tryfirst
     def test1_login_mengkome_add_cookie_page(self):
         mengkome_url = 'https://mengkome.pythonanywhere.com'
         print('\n' + str(self.__class__.ix) + ') -- >  ' + str(self._testMethodName) + '\n')
@@ -53,7 +53,7 @@ class P01MengkomeLoginLogoutTests(unittest.TestCase):
         self.__class__.urlnow = self.mengkomepage.returnCurrentURL()
 
     # @pytest.mark.run(order=2)
-    @pytest.mark.trylast
+    # @pytest.mark.trylast
     def test2_relogin_bycookie_chkinfos(self):
         print('\n' + str(self.__class__.ix) + ') -- >  ' + str(self._testMethodName) + '\n')
         # auto login using test1 cookie & chk infos
@@ -113,6 +113,24 @@ class P01MengkomeLoginLogoutTests(unittest.TestCase):
         self.tstatus.mark(result, "Logged out element Verified")
         print("ResultLast = " + str(result))
         self.tstatus.markFinal("Relogin by cookie & then Log-out Verified", result, sys._getframe().f_code.co_name)
+
+    def test9_relogin_after_logout(self):
+        print('\n' + str(self.__class__.ix) + ') -- >  ' + str(self._testMethodName) + '\n')
+        # auto relogin after logout
+        self.log.info("=== >> " + sys._getframe().f_code.co_name + " started")
+        urlcurrent = self.__class__.urlnow
+        print('Current URL = ' + urlcurrent)
+        self.mengkomepage.gotosite(urlcurrent)
+        self.mengkomepage.addcookietosite(self.__class__.cookie)
+        self.mengkomepage.gotosite(urlcurrent)
+        result = self.mengkomepage.verifyPageTitle("Log in | Django site admin")
+        self.tstatus.mark(result, "Front page / Login title Verified")
+        print("Result " + str(len(self.tstatus.resultList)) + "  =  " + str(result))
+        # '//*[@id="login-form"]'
+        result = self.mengkomepage.isElementPresent("login-form", locatorType='id')
+        self.tstatus.mark(result, "Login element Verified")
+        print("ResultLast = " + str(result))
+        self.tstatus.markFinal("Relogin by cookie not allowed Verified", result, sys._getframe().f_code.co_name)
 
     def tearDown(self):
         print('CURRENT URL = ' + str(self.mengkomepage.returnCurrentURL()))
