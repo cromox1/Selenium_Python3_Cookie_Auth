@@ -116,7 +116,7 @@ class BasePage(SeleniumDriver):
     def verifyDateIsFuture(self, futureepoch):
         from time import time, strftime, localtime
         currentepoch = int(time())
-        currentdate = strftime('%Y-%m-%d %H:%M:%S', localtime(currentepoch))
+        currentdate = strftime('%Y-%m-%d %H:%M:%S')
         futuredate = strftime('%Y-%m-%d %H:%M:%S', localtime(futureepoch))
         self.log.info("FutureDate ( " + str(int(futureepoch)) + " / " + str(futuredate) + " ) > CurrentDate ( " +
                       str(int(currentepoch)) + " / " + str(currentdate)+ " )")
@@ -125,7 +125,7 @@ class BasePage(SeleniumDriver):
     def verifyDateIsHistory(self, historyepoch):
         from time import time, strftime, localtime
         currentepoch = int(time())
-        currentdate = strftime('%Y-%m-%d %H:%M:%S', localtime(currentepoch))
+        currentdate = strftime('%Y-%m-%d %H:%M:%S')
         historydate = strftime('%Y-%m-%d %H:%M:%S', localtime(historyepoch))
         self.log.info("HistoryDate ( " + str(int(historyepoch)) + " / " + str(historydate) + " ) < CurrentDate ( " +
                       str(int(currentepoch)) + " / " + str(currentdate) + " )")
