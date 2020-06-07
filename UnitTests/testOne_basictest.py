@@ -107,7 +107,7 @@ class TestOne(unittest.TestCase):
         name2 = 'One'
         email1 = 'bumimanusia@gmail.com'
         comp1 = 'Ranorexxx'
-        phone1 = "07777999111"
+        phone1 = "07769916425"
         subject1 = 'Test1'
         print('NAME : ' + name1 + ' ' + name2)
         print('EMAIL : ' + email1 + ' / PHONE : ' + phone1)
