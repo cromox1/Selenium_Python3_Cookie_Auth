@@ -27,7 +27,7 @@ Simple cookie authentication usage
 
 To run :
 
-### python3 UnitTests/test2_login_logout_diffwindows_chromeopts_three.py
+### python3 UnitTests/test1_login_logout_diffwindows_chromeopts.py
 
 ## 1.2) pytest Automation Framework
 
@@ -70,7 +70,7 @@ Explore on hoover (mouse moving around from element to element), search, downloa
 
 To run :
 
-### python3 testOne_basictest.py
+### python3 UnitTests/test2_pixitmedia_hoover_around_downloadfile.py 
 
 ## 2.2) pytest Automation Framework
 
