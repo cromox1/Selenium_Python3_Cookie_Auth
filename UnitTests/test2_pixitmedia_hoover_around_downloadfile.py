@@ -5,9 +5,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import unittest
 from time import strftime, sleep
-# from requests import get as urlget
+from requests import get as urlget
+# from requests import head as urlhead
 # from PyPDF2 import PdfFileReader as PDFread
 # from os import remove as removefile
+# from pymagic import magic_file
+# import libmagic
+# import filemagic
+import fleep
+
 from selenium.webdriver.common.action_chains import ActionChains as hoover
 
 class TestOne(unittest.TestCase):
@@ -33,7 +39,7 @@ class TestOne(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.google.co.uk"
         self.verificationErrors = []
-        # self.tmpfilename = 'tmptest123.pdf'
+        self.tmpfilename = 'tmptest123.pdf'
 
     def test_one(self):
         driver = self.driver
@@ -72,46 +78,47 @@ class TestOne(unittest.TestCase):
         # driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").send_keys(Keys.PAGE_DOWN)
         # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         # driver.execute_script("window.scrollTo(0, Y)")
-        # Half page scroll down
-        last_height = self.displayheight()
-        one_height = int(0.5 * last_height)
-        print('0.5HEIGHT = ' + str(one_height))
 
         driver.find_elements_by_xpath("//*[contains(text(),'Data Sheets')]")[0].click()
-        driver.execute_script("window.scrollTo(0, " + str(one_height) + ");")
+        driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
         sleep(2)
         pixstor_overview = driver.find_elements_by_xpath("//*[contains(text(),'PixStor Overview')]")
         if len(pixstor_overview) >= 1:
-            print('PixStor Overview pdf FOUND!!!')
+            print('PixStor Overview PDF FOUND!!!')
             print('Element text = ' + str(pixstor_overview[0].text))
             pixstor_overview[0].click()
-        else:
-            print('PixStor Overview NOT FOUND')
+            # View Datasheet - PDF file
+            pdffileurl = driver.find_element_by_xpath("//*[contains(text(),'DOWNLOAD')]").get_attribute('href')
+            print('PDF FILE URL = ' + str(pdffileurl))
+            # validate PDF file
+            req = urlget(pdffileurl)
+            # validate1 - simple by check header -- NOT WORKING ANYMORE
+            # self.assertGreater(int(req.headers['Content-Length']), 1000)
+            # print('HEADER = ' + str(req.headers))
+            # self.assertEqual('application/pdf', req.headers['Content-Type'])
+            # validate2 - download & check file using PyPDF2
+            file1 = open(self.tmpfilename, "wb")
+            file1.write(req.content)
+            sleep(10)
+            file1.close()
+            file1 = open(self.tmpfilename, "rb")
+            print('TYPE = ' + str(fleep.get(file1.read(128)).extension))
+            file1.close()
+            # print()
+            # pdfproducer = PDFread(self.tmpfilename).getDocumentInfo().producer
+            # pdfchklist = ['Adobe', 'PDF', 'Acrobat']  # words to confirm PDF
+            # listintrsect = [x.upper() for x in pdfchklist if x.upper() in pdfproducer.upper()]
+            # self.assertGreaterEqual(len(listintrsect), 1)
 
-        # # View Datasheet - PDF file -- NOW NO LONGER EXIST !!!!
-        # driver.find_element_by_xpath("//span[@class='elementor-button-text']").click()
-        #
-        # ## validate PDF file
-        # currenturl = driver.current_url
-        # req = urlget(currenturl)
-        # # validate1 - simple by check header
-        # self.assertGreater(int(req.headers['Content-Length']), 1000)
-        # self.assertEqual(req.headers['Content-Type'], 'application/pdf')
-        # # validate2 - download & check file using PyPDF2
-        # file1 = open(self.tmpfilename, "wb")
-        # file1.write(req.content)
-        # pdfproducer = PDFread(self.tmpfilename).getDocumentInfo().producer
-        # file1.close()
-        # pdfchklist = ['Adobe', 'PDF', 'Acrobat']  # words to confirm PDF
-        # listintrsect = [x.upper() for x in pdfchklist if x.upper() in pdfproducer.upper()]
-        # self.assertGreaterEqual(len(listintrsect), 1)
+        else:
+            print('PixStor Overview PDF NOT FOUND')
 
         # Contact Us Form
         driver.get(basepixitmediaurl)
         driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").click()
         # print("URL Contact Us = " + str(driver.current_url))
 
-        driver.execute_script("window.scrollTo(0, " + str(one_height) + ");")
+        driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
         # All data to send
         name1 = 'Cromox'
         name2 = 'One'
@@ -156,11 +163,11 @@ class TestOne(unittest.TestCase):
         current2 = strftime("%Y-%m-%d %H:%M:%S")
         message1 = "This is a test for Jez \nToday is " + str(current2) + \
                    '\nExact testing time : From ' + str(current1) + ' to ' + str(current2) + \
-                   "\nThis Earth of Mankind (Bumi Manusia) - is it Jez?? I don't think so"
+                   "\nThis Earth of Mankind (Bumi Manusia) -> is it Jez?? I don't think so. Look at you!!"
         print('MESSAGE :\n' + str(message1))
         element_message.send_keys(message1)
         # Half page scroll down
-        driver.execute_script("window.scrollTo(0, " + str(one_height) + ");")
+        driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
         driver.find_element_by_name('input_8.1').click()
         element_send = driver.find_element_by_xpath("//*[@value='Send']")
         hoover(driver).move_to_element(element_send).perform()
@@ -188,8 +195,9 @@ class TestOne(unittest.TestCase):
             last_height = 1800
         if last_height <= 1800:
             last_height = 1850
-        print('HEIGHT = ' + str(last_height))
-        return last_height
+        half_height = int(0.5 * last_height)
+        print('HEIGHT = ' + str(last_height) + ' / 0.5HEIGHT = ' + str(half_height))
+        return last_height,half_height
 
 if __name__ == "__main__":
     unittest.main()
