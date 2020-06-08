@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import unittest
-from time import strftime
+from time import strftime, sleep
 # from requests import get as urlget
 # from PyPDF2 import PdfFileReader as PDFread
 # from os import remove as removefile
@@ -44,6 +44,7 @@ class TestOne(unittest.TestCase):
         driver.find_element_by_name('q').click()
         driver.find_element_by_name('q').send_keys("pixitmedia" + Keys.ENTER)
         list_pixitmedia = driver.find_elements_by_xpath("//*[contains(text(),'Pixit Media')]")
+        # OLD code - not working anymore
         # for element in list_pixitmedia:
         #     if element.text == "https://www.pixitmedia.com/":
         #         element.click()
@@ -52,11 +53,6 @@ class TestOne(unittest.TestCase):
         list_pixitmedia[0].click()
         basepixitmediaurl = driver.current_url
         print('PIXITMEDIA URL = ' + str(basepixitmediaurl))
-        # Products -- HAS EXPIRED & HAS CHANGED
-        # driver.find_element_by_xpath('//*[@id="menu-item-48"]/a/span').click()
-        # PixStor -- HAS EXPIRED & CHANGED... NOW USE HOOVER
-        # driver.find_element_by_link_text('PixStor').click()
-        # driver.find_element_by_link_text("PixStor Search").click()
         element_pixstor = driver.find_elements_by_xpath("//*[contains(text(),'PixStor')]")[0]
         hoover(driver).move_to_element(element_pixstor).perform()
         features_el = driver.find_element_by_xpath("//*[contains(text(),'Features')]")
@@ -64,6 +60,33 @@ class TestOne(unittest.TestCase):
         powersearch_el = driver.find_element_by_xpath("//*[contains(text(),'Powerful Search')]")
         hoover(driver).move_to_element(powersearch_el).perform()
         powersearch_el.click()
+
+        driver.get(basepixitmediaurl)
+        element_comp = driver.find_elements_by_xpath("//*[contains(text(),'Company')]")[0]
+        hoover(driver).move_to_element(element_comp).perform()
+        resc_el = driver.find_element_by_xpath("//*[contains(text(),'Resources')]")
+        hoover(driver).move_to_element(resc_el).perform()
+        resc_el.click()
+
+        # Full Page scroll down
+        # driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").send_keys(Keys.PAGE_DOWN)
+        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        # driver.execute_script("window.scrollTo(0, Y)")
+        # Half page scroll down
+        last_height = self.displayheight()
+        one_height = int(0.5 * last_height)
+        print('0.5HEIGHT = ' + str(one_height))
+
+        driver.find_elements_by_xpath("//*[contains(text(),'Data Sheets')]")[0].click()
+        driver.execute_script("window.scrollTo(0, " + str(one_height) + ");")
+        sleep(2)
+        pixstor_overview = driver.find_elements_by_xpath("//*[contains(text(),'PixStor Overview')]")
+        if len(pixstor_overview) >= 1:
+            print('PixStor Overview pdf FOUND!!!')
+            print('Element text = ' + str(pixstor_overview[0].text))
+            pixstor_overview[0].click()
+        else:
+            print('PixStor Overview NOT FOUND')
 
         # # View Datasheet - PDF file -- NOW NO LONGER EXIST !!!!
         # driver.find_element_by_xpath("//span[@class='elementor-button-text']").click()
@@ -87,20 +110,7 @@ class TestOne(unittest.TestCase):
         driver.get(basepixitmediaurl)
         driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").click()
         # print("URL Contact Us = " + str(driver.current_url))
-        # Full Page scroll down
-        # driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").send_keys(Keys.PAGE_DOWN)
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # driver.execute_script("window.scrollTo(0, Y)")
-        # Half page scroll down
-        try:
-            last_height = driver.execute_script("return document.body.scrollHeight")
-        except:
-            last_height = 1800
-        if last_height <= 1800:
-            last_height = 1850
-        print('HEIGHT = ' + str(last_height))
-        one_height = int(0.5 * last_height)
-        print('0.5HEIGHT = ' + str(one_height))
+
         driver.execute_script("window.scrollTo(0, " + str(one_height) + ");")
         # All data to send
         name1 = 'Cromox'
@@ -169,6 +179,17 @@ class TestOne(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         print('\n--- > tearDownClass\n')
+
+    def displayheight(self):
+        driver = self.driver
+        try:
+            last_height = driver.execute_script("return document.body.scrollHeight")
+        except:
+            last_height = 1800
+        if last_height <= 1800:
+            last_height = 1850
+        print('HEIGHT = ' + str(last_height))
+        return last_height
 
 if __name__ == "__main__":
     unittest.main()
