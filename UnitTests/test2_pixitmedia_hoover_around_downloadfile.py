@@ -5,14 +5,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import unittest
 from time import strftime, sleep
-from requests import get as urlget
-# from requests import head as urlhead
-# from PyPDF2 import PdfFileReader as PDFread
-# from os import remove as removefile
-# from pymagic import magic_file
-# import libmagic
-# import filemagic
+from os import remove as removefile
 import fleep
+import wget
 
 from selenium.webdriver.common.action_chains import ActionChains as hoover
 
@@ -74,11 +69,6 @@ class TestOne(unittest.TestCase):
         hoover(driver).move_to_element(resc_el).perform()
         resc_el.click()
 
-        # Full Page scroll down
-        # driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").send_keys(Keys.PAGE_DOWN)
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # driver.execute_script("window.scrollTo(0, Y)")
-
         driver.find_elements_by_xpath("//*[contains(text(),'Data Sheets')]")[0].click()
         driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
         sleep(2)
@@ -91,23 +81,13 @@ class TestOne(unittest.TestCase):
             pdffileurl = driver.find_element_by_xpath("//*[contains(text(),'DOWNLOAD')]").get_attribute('href')
             print('PDF FILE URL = ' + str(pdffileurl))
             # validate PDF file
-            req = urlget(pdffileurl)
-            # validate1 - simple by check header -- NOT WORKING ANYMORE
-            # self.assertGreater(int(req.headers['Content-Length']), 1000)
-            # print('HEADER = ' + str(req.headers))
-            # self.assertEqual('application/pdf', req.headers['Content-Type'])
-            # validate2 - download & check file using PyPDF2
-            file1 = open(self.tmpfilename, "wb")
-            file1.write(req.content)
-            sleep(10)
-            file1.close()
+            wget.download(pdffileurl, out=self.tmpfilename)
             file1 = open(self.tmpfilename, "rb")
-            print('TYPE = ' + str(fleep.get(file1.read(128)).extension))
+            chkfile = fleep.get(file1.read(128))
+            print('TYPE = ' + str(chkfile.type))
+            print('EXTN = ' + str(chkfile.extension))
+            print('MIME = ' + str(chkfile.mime))
             file1.close()
-            # print()
-            # pdfproducer = PDFread(self.tmpfilename).getDocumentInfo().producer
-            # pdfchklist = ['Adobe', 'PDF', 'Acrobat']  # words to confirm PDF
-            # listintrsect = [x.upper() for x in pdfchklist if x.upper() in pdfproducer.upper()]
             # self.assertGreaterEqual(len(listintrsect), 1)
 
         else:
@@ -177,17 +157,21 @@ class TestOne(unittest.TestCase):
         print('\n--- > tearDown\n')
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)
-        # try:
-        #     removefile(self.tmpfilename)
-        #     # print('  Successfully remove tmp file ' + str(self.tmpfilename))
-        # except WindowsError as exx:
-        #     print('  Error = ' + str(exx) + ' / file = ' + str(self.tmpfilename))
+        try:
+            removefile(self.tmpfilename)
+            # print('  Successfully remove tmp file ' + str(self.tmpfilename))
+        except WindowsError as exx:
+            print('  Error = ' + str(exx) + ' / file = ' + str(self.tmpfilename))
 
     @classmethod
     def tearDownClass(cls):
         print('\n--- > tearDownClass\n')
 
     def displayheight(self):
+        # Page scroll down
+        # driver.find_element_by_xpath("//*[contains(text(),'Contact Us')]").send_keys(Keys.PAGE_DOWN)
+        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        # driver.execute_script("window.scrollTo(0, Y)")
         driver = self.driver
         try:
             last_height = driver.execute_script("return document.body.scrollHeight")
