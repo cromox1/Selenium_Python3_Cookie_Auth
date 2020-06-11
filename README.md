@@ -57,12 +57,16 @@ Assignment 2 :
 Explore on hoover (mouse moving around from element to element), search, download and validate file 
 
 - Launch Google Website
-- Search for pixitmedia, then go to pixitmedia site
-- Select PIXSTOR menu link, then Features then Powerful Search
-- Select the COMPANY menu link, then go to Resources
-- Validate that the PixStor Overview DATASHEET button returns a PDF/download
+  - Search for pixitmedia
+  - then go to pixitmedia site
+- Select PIXSTOR menu link
+  - then Features
+  - then Powerful Search
+- Select the COMPANY menu link
+  - then go to Resources
+  - Validate that the PixStor Overview DATASHEET button returns a PDF/download
 - Select the CONTACT US menu link
-- Fill in the form with your contact details.
+  - Fill in the form with your contact details.
   - For the Message text area insert the characters: This is a test for Jez
 - Send the form
 
