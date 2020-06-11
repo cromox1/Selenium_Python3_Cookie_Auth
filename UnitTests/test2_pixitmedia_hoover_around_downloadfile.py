@@ -62,6 +62,7 @@ class TestHooverPixitMedia(unittest.TestCase):
         driver.find_element_by_name('q').click()
         driver.find_element_by_name('q').send_keys("pixitmedia" + Keys.ENTER)
         list_pixitmedia = driver.find_elements_by_xpath("//*[contains(text(),'Pixit Media')]")
+        self.assertGreaterEqual(len(list_pixitmedia), 1)
         # OLD code - not working anymore
         # for element in list_pixitmedia:
         #     if element.text == "https://www.pixitmedia.com/":
@@ -71,7 +72,9 @@ class TestHooverPixitMedia(unittest.TestCase):
         list_pixitmedia[0].click()
         basepixitmediaurl = driver.current_url
         print('PIXITMEDIA URL = ' + str(basepixitmediaurl))
-        element_pixstor = driver.find_elements_by_xpath("//*[contains(text(),'PixStor')]")[0]
+        elements_pixstor = driver.find_elements_by_xpath("//*[contains(text(),'PixStor')]")
+        self.assertGreaterEqual(len(elements_pixstor), 1)
+        element_pixstor = elements_pixstor[0]
         hoover(driver).move_to_element(element_pixstor).perform()
         features_el = driver.find_element_by_xpath("//*[contains(text(),'Features')]")
         hoover(driver).move_to_element(features_el).perform()
