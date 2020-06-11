@@ -11,26 +11,43 @@ import wget
 
 from selenium.webdriver.common.action_chains import ActionChains as hoover
 
-class TestOne(unittest.TestCase):
+class TestHooverPixitMedia(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print('\n--- > setUpClass\n')
 
-    def setUp(self):
+    def setUp(self, browser='brave'):
         print('\n--- > setUp\n')
         # self.driver = webdriver.Firefox()
-        self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
-        self.chrome_options = Options()
-        self.chrome_options.add_argument('--ignore-certificate-errors')
-        self.chrome_options.add_argument("--disable-web-security")
-        self.chrome_options.add_argument("--incognito")
-        self.chrome_options.add_argument("--allow-running-insecure-content")
-        self.chrome_options.add_argument("--allow-cross-origin-auth-prompt")
-        self.chrome_options.add_argument("--disable-cookie-encryption")
-        self.chrome_options.add_argument('--disable-dev-shm-usage')
-        self.chrome_options.add_argument("--test-type")
-        ## webdriver section
-        self.driver = webdriver.Chrome(self.chromedriverpath, options=self.chrome_options)
+        if browser=='brave':
+            brave_exe=r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
+            self.chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
+            self.chrome_options = Options()
+            self.chrome_options.add_argument('--ignore-certificate-errors')
+            self.chrome_options.add_argument("--disable-web-security")
+            self.chrome_options.add_argument("--incognito")
+            self.chrome_options.add_argument("--allow-running-insecure-content")
+            self.chrome_options.add_argument("--allow-cross-origin-auth-prompt")
+            self.chrome_options.add_argument("--disable-cookie-encryption")
+            self.chrome_options.add_argument('--disable-dev-shm-usage')
+            self.chrome_options.add_argument("--test-type")
+            self.chrome_options.binary_location = brave_exe
+            ## webdriver section
+            self.driver = webdriver.Chrome(self.chromedriverpath, options=self.chrome_options)
+            # pass
+        else:
+            self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+            self.chrome_options = Options()
+            self.chrome_options.add_argument('--ignore-certificate-errors')
+            self.chrome_options.add_argument("--disable-web-security")
+            self.chrome_options.add_argument("--incognito")
+            self.chrome_options.add_argument("--allow-running-insecure-content")
+            self.chrome_options.add_argument("--allow-cross-origin-auth-prompt")
+            self.chrome_options.add_argument("--disable-cookie-encryption")
+            self.chrome_options.add_argument('--disable-dev-shm-usage')
+            self.chrome_options.add_argument("--test-type")
+            ## webdriver section
+            self.driver = webdriver.Chrome(self.chromedriverpath, options=self.chrome_options)
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.google.co.uk"
         self.verificationErrors = []
