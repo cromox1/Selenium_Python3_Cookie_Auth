@@ -26,7 +26,7 @@ Simple cookie authentication usage
 ## 1.1) Basic UnitTest :
 
 To run :
-```
+```bash
 python3 UnitTests/test1_login_logout_diffwindows_chromeopts.py
 ```
 ## 1.2) pytest Automation Framework
@@ -37,7 +37,7 @@ MengKome Automation Framework consise these directories:
 3. screenshots (screenshot's pictures - create automatically if ERROR occured)
 
 To run tests (example) :
-```
+```bash
 py.test -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py --browser "$browser"
 
 "$browser" = [ ie / chrome / firefox / opera ]
@@ -66,12 +66,12 @@ Explore on hoover (mouse moving around from element to element), search, downloa
 ## 2.1) Basic UnitTest :
 
 To run :
-```
+```bash
 python3 UnitTests/test2_pixitmedia_hoover_around_downloadfile.py 
 ```
 ## 2.2) pytest Automation Framework
 
 To run tests (example) :
-```
+```bash
 py.test -v -s tests/p01google/p01searchpixitmedia_tests.py --browser "$browser"
 ```
