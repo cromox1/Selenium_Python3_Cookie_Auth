@@ -137,10 +137,12 @@ class WebDriverFactory():
         # Loading browser with App URL
         driver.get(baseURL)
 
-        try:
-            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['version']) # Python 3.7 and below
-        except:
-            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['browserVersion']) # Python 3.8 & above
+        if driver_version:
+            try:
+                driver_version = str(driver.capabilities['version']) # Python 3.7 and below
+            except:
+                driver_version = str(driver.capabilities['browserVersion']) # Python 3.8 & above
+        print('Browser version ( ' + str(driver.name) + ' ) = ' + str(driver_version))
         print()
 
         return driver
