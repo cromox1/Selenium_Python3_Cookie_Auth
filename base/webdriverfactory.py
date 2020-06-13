@@ -37,10 +37,9 @@ class WebDriverFactory():
         Returns:
             'WebDriver Instance'
         """
-        # strver = 'version'
-        strver = 'browserVersion'
+
         driver_name = 'unknown'
-        driver_version = 'unknown'
+
         if self.browser == "iexplorer" or self.browser == "ie" or self.browser == "IE":
             # Set IE driver
             iedriverserver = r'C:\tools\Python36\Scripts\IEDriverServer_x64_2.42.0.exe'
@@ -87,6 +86,21 @@ class WebDriverFactory():
             chrome_options.add_argument("--proxy-server='direct://'")
             chrome_options.add_argument("--proxy-bypass-list=*")
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
+        elif self.browser == 'brave':
+            brave_exe = r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument('--ignore-certificate-errors')
+            chrome_options.add_argument("--disable-web-security")
+            chrome_options.add_argument("--incognito")
+            chrome_options.add_argument("--allow-running-insecure-content")
+            chrome_options.add_argument("--allow-cross-origin-auth-prompt")
+            chrome_options.add_argument("--disable-cookie-encryption")
+            chrome_options.add_argument('--disable-dev-shm-usage')
+            chrome_options.add_argument("--test-type")
+            chrome_options.binary_location = brave_exe
+            ## webdriver section
+            driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
         else:
             # Set chrome driver
             # self.browser == "chrome":
@@ -94,10 +108,17 @@ class WebDriverFactory():
             #os.environ["webdriver.chrome.driver"] = chromedriverpath
             chrome_options = webdriver.ChromeOptions()
             # chrome_options.add_argument('--disable-extensions')
-            #chrome_options.add_argument('--profile-directory=Default')
-            chrome_options.add_argument("--incognito")
+            # chrome_options.add_argument('--profile-directory=Default')
             # chrome_options.add_argument("--disable-plugins-discovery")
             # chrome_options.add_argument("--start-maximized")
+            chrome_options.add_argument('--ignore-certificate-errors')
+            chrome_options.add_argument("--disable-web-security")
+            chrome_options.add_argument("--incognito")
+            chrome_options.add_argument("--allow-running-insecure-content")
+            chrome_options.add_argument("--allow-cross-origin-auth-prompt")
+            chrome_options.add_argument("--disable-cookie-encryption")
+            chrome_options.add_argument('--disable-dev-shm-usage')
+            chrome_options.add_argument("--test-type")
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
             #driver.set_window_size(1440, 900)
 
@@ -116,9 +137,10 @@ class WebDriverFactory():
         # Loading browser with App URL
         driver.get(baseURL)
 
-        if driver_name != 'unknown':
-            print('Browser version ( ' + str(driver_name) + ' ) = ' + str(driver_version))
-        else:
-            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities[strver])
+        try:
+            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['version']) # Python 3.7 and below
+        except:
+            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['browserVersion']) # Python 3.8 & above
+        print()
 
         return driver
