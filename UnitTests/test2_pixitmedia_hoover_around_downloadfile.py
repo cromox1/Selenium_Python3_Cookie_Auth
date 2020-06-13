@@ -98,6 +98,7 @@ class TestHooverPixitMedia(unittest.TestCase):
         driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
         sleep(2)
         pixstor_overview = driver.find_elements_by_xpath("//*[contains(text(),'PixStor Overview')]")
+        self.assertGreaterEqual(len(pixstor_overview), 1)
         if len(pixstor_overview) >= 1:
             print('PixStor Overview PDF FOUND!!!')
             print('Element text = ' + str(pixstor_overview[0].text))
