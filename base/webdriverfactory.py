@@ -37,9 +37,8 @@ class WebDriverFactory():
         Returns:
             'WebDriver Instance'
         """
-
+        driver_version = 'unknown'
         driver_name = 'unknown'
-
         if self.browser == "iexplorer" or self.browser == "ie" or self.browser == "IE":
             # Set IE driver
             iedriverserver = r'C:\tools\Python36\Scripts\IEDriverServer_x64_2.42.0.exe'
@@ -73,7 +72,6 @@ class WebDriverFactory():
             driver_version = _operacurrentversion
         elif self.browser == "firefox" or self.browser == "ff":
             driver = webdriver.Firefox()
-            # strver = 'browserVersion'
         elif self.browser == "headless" or self.browser == "nobrowser" or self.browser == "virtual":
             # This is for running without open Browser UI display - good for Jenkins
             chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
@@ -101,6 +99,7 @@ class WebDriverFactory():
             chrome_options.binary_location = brave_exe
             ## webdriver section
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
+            driver_name = 'brave'
         else:
             # Set chrome driver
             # self.browser == "chrome":
@@ -122,27 +121,27 @@ class WebDriverFactory():
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
             #driver.set_window_size(1440, 900)
 
-        # dah jadikan default browser = chrome
-        # else:
-        #    driver = webdriver.Firefox()
-        #    strver = 'browserVersion'
-
         # Setting Driver Implicit Time out for An Element
         driver.implicitly_wait(10)
-
-        # Maximize the window
-        if driver.name == 'chrome' and driver_name == 'unknown':
-            driver.maximize_window()
-
         # Loading browser with App URL
         driver.get(baseURL)
 
-        if driver_version:
+        if driver_name == 'unknown':
+            try:
+                driver_name = driver.name
+            except:
+                driver_name = 'unknown'
+        if driver_name == 'chrome':
+            driver.maximize_window()  # Maximize the window for chrome
+
+        if driver_version == 'unknown':
             try:
                 driver_version = str(driver.capabilities['version']) # Python 3.7 and below
             except:
                 driver_version = str(driver.capabilities['browserVersion']) # Python 3.8 & above
-        print('Browser version ( ' + str(driver.name) + ' ) = ' + str(driver_version))
+
+        print('Browser version ( ' + str(driver_name) + ' ) = ' + str(driver_version))
         print()
+
 
         return driver

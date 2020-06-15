@@ -25,7 +25,7 @@ class SeleniumDriver():
         masani = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
         # fileName = resultMessage + "." + str(round(time.time()*1000)) + ".png"
         fileName = resultMessage.replace(" ","_").replace("/","_").replace("-","_") + "_" + masani + ".png"
-        screenshotDirectory = "..\screenshots\\"
+        screenshotDirectory = "..\\screenshots\\"
         relativeFileName = screenshotDirectory + fileName
         currentDirectory = os.path.dirname(__file__)
         destinationFile = os.path.join(currentDirectory, relativeFileName)
