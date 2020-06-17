@@ -86,7 +86,7 @@ class WebDriverFactory():
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
         elif self.browser == 'brave':
             brave_exe = r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
-            chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument('--ignore-certificate-errors')
             chrome_options.add_argument("--disable-web-security")
@@ -141,6 +141,4 @@ class WebDriverFactory():
                 driver_version = str(driver.capabilities['browserVersion']) # Python 3.8 & above
 
         print('Browser ( ' + str(driver_name) + ' ) version = ' + str(driver_version))
-        # print()
-
         return driver
