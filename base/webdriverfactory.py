@@ -141,7 +141,6 @@ class WebDriverFactory():
                 driver_version = str(driver.capabilities['browserVersion']) # Python 3.8 & above
 
         print('Browser ( ' + str(driver_name) + ' ) version = ' + str(driver_version))
-        print()
-
+        # print()
 
         return driver

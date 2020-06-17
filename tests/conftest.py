@@ -6,14 +6,14 @@ from base.webdriverfactory import WebDriverFactory as webbrowser
 
 @pytest.yield_fixture()
 def setUp():
-    print("\n--- > Running method level setUp")
+    print("--- > Running method level setUp")
     yield
     print("\n--- > Running method level tearDown")
 
 @pytest.yield_fixture(scope="class")
 def oneTimeSetUp(request, browser, mainURL="https://www.google.co.uk"):
 
-    print("\n== > Running one time setUp")
+    print("\n\n== > FIRSTTIMESETUP - Running one time setUp\n")
     print('Python Version = ' + sys.version)
 
     wdf = webbrowser(browser)
@@ -24,7 +24,7 @@ def oneTimeSetUp(request, browser, mainURL="https://www.google.co.uk"):
 
     yield driver
     driver.quit()
-    print("\n== > Running one time tearDown")
+    print("\n== > FINALTIMETEARDOWN - Running one time tearDown")
 
 def pytest_addoption(parser):
     parser.addoption("--browser")

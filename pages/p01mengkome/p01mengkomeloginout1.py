@@ -69,6 +69,9 @@ class P01LoginLogoutCookie(BasePage):
     def gotosite(self, URL):
         return self.driver.get(URL)
 
+    def closeBrowserPage(self):
+        return self.driver.close()
+
     def addcookietosite(self, cookie):
         self.driver.add_cookie(cookie)
 
