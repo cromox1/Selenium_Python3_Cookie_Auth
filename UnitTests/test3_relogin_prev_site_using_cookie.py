@@ -1,3 +1,11 @@
+'''
+WORK FOR BELOW WEBSITES (AT THE MOMENT):
+1) github.com -- > cookie['name'] = 'user_session'
+2) mengkome.pythonanywhere.com (my DJango website) -- > cookie['name'] = 'sessionid'
+3) cwjobs.co.uk -- > cookie['name'] = 'wrSessionId'
+4) totaljobs.com -- > cookie['name'] = 'wrSessionId'
+5)
+'''
 import browser_cookie3
 import time
 
@@ -15,12 +23,13 @@ def extract_cookie(domainname=""):
                 i = i + 1
         else:
             print('COOKIE [ all_domain ] = NONE')
-        cookielist = ['None']
+        cookielist = [{'domain': 'None', 'expires': 0}]
     else:
         if len(domaincookies) >= 1:
             i = 1
             if len(domaincookies) > 1:
-                print('[No])  [Name]  /  [Expires]  /  [Value] \n')
+                # print('[No])  [Name]  /  [Expires]  /  [Value] \n')
+                print('[No])  [Name]  /  [Domain]  /  [Value] \n')
             for c in domaincookies:
                 cookie = c.__dict__
                 if len(domaincookies) == 1:
@@ -30,13 +39,16 @@ def extract_cookie(domainname=""):
                     cookielist.append(cookie)
                 else:
                     if int(cookie['expires']) >= int(time.time()):
-                        print(str(i) + ') ' + str(cookie['name']) + ' / ' + str(
-                            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' / ' + str(cookie['value']))
+                        # print(str(i) + ') ' + str(cookie['name']) + ' / ' + str(
+                        #     time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' / ' + str(
+                        #     cookie['value']))
+                        print(str(i) + ') ' + str(cookie['name']) + ' / ' + str(cookie['domain']) + ' / ' + str(
+                            cookie['value']))
                         cookielist.append(cookie)
                         i = i + 1
         else:
             print('COOKIE [ ' + domainname + ' ] = NONE')
-            cookielist = ['None']
+            cookielist = [{'domain': 'None', 'expires': 0}]
     return cookielist
 
 def browserDriver(browser='chrome'):
@@ -45,7 +57,7 @@ def browserDriver(browser='chrome'):
     print('\n--- > start browser')
     if browser=='brave':
         brave_exe=r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
-        chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
+        chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
         chrome_options = Options()
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument("--disable-web-security")
@@ -54,9 +66,8 @@ def browserDriver(browser='chrome'):
         chrome_options.add_argument("--allow-cross-origin-auth-prompt")
         chrome_options.add_argument("--disable-cookie-encryption")
         chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument("--test-type")
+        # chrome_options.add_argument("--test-type")
         chrome_options.binary_location = brave_exe
-        ## webdriver section
         driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
     else:
         chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
@@ -68,9 +79,9 @@ def browserDriver(browser='chrome'):
         chrome_options.add_argument("--allow-cross-origin-auth-prompt")
         chrome_options.add_argument("--disable-cookie-encryption")
         chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument("--test-type")
-        ## webdriver section
+        # chrome_options.add_argument("--test-type")
         driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
+    driver.maximize_window()
     driver.implicitly_wait(10)
     print('--- > browser driver now ready\n')
     return driver
@@ -97,17 +108,26 @@ print('\n  -- > domainname = ' + yourdomain + '\n')
 cookielist = extract_cookie(yourdomain)
 print()
 cookie1 = choosedomaincookie(cookielist)
-print('COOKIE = ' + str(cookie1))
+if cookie1['secure'] == 0:
+    cookie1['secure'] = False
+elif cookie1['secure'] == 1:
+    cookie1['secure'] = True
+else:
+    cookie1['secure'] = True
 
 ## Browse section - only use Chrome or Brave only
 if cookie1['expires'] > 0:
     driver = browserDriver()
     urlx = 'https://' + cookie1['domain'] + cookie1['path']
+    print('URL = ' + str(urlx))
     try:
+        driver.get(urlx)
+        print('COOKIE = ' + str(cookie1))
         driver.add_cookie(cookie1)
         driver.get(urlx)
-    except:
-        print('COOKIE ERROR - INVALID COOKIE DOMAIN')
+        # then you can do whatever you want to do here
+    except Exception as e:
+        print('  Error -- > ' + e.__str__())
         driver.quit()
 else:
     print('Domain has no cookie or cookie has expired')
