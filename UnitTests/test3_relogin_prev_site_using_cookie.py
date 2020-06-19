@@ -86,20 +86,20 @@ def browserDriver(browser='chrome'):
     print('--- > browser driver now ready\n')
     return driver
 
-def choosedomaincookie(mycookielist):
-    cookiex = {'domain': 'None', 'expires': 0}
-    if len(mycookielist) == 1:
-        cookiex = mycookielist[0]
+def choosedomaincookie(cookielist):
+    cookie = {'domain': 'None', 'expires': 0}
+    if len(cookielist) == 1:
+        cookie = cookielist[0]
     else:
-        yourdomain = input('Choose Cookie [ 1 - ' + str(len(mycookielist)) + ' ] : ')
+        yourdomain = input('Choose Cookie [ 1 - ' + str(len(cookielist)) + ' ] : ')
         try:
-            if int(yourdomain) <= len(mycookielist) and int(yourdomain) > 0:
-                cookiex = mycookielist[int(yourdomain) - 1]
+            if int(yourdomain) <= len(cookielist) and int(yourdomain) > 0:
+                cookie = cookielist[int(yourdomain) - 1]
             else:
-                print('  -- > WRONG SELECTION - OUT OF RANGE')
+                print('  -- > WRONG SELECTION - Out Of Range')
         except:
-            print('  -- > WRONG SELECTION - NOT AN INTEGER')
-    return cookiex
+            print('  -- > WRONG SELECTION - Not An Integer')
+    return cookie
 
 print()
 print('\n-- > > Specific Domainname ---- \n')
