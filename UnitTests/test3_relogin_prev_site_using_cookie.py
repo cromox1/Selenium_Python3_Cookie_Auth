@@ -42,7 +42,7 @@ def extract_cookie(domainname=""):
 def browserDriver(browser='chrome'):
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
-    print('\n--- > setUp\n')
+    print('\n--- > start browser')
     if browser=='brave':
         brave_exe=r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
         chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
@@ -72,6 +72,7 @@ def browserDriver(browser='chrome'):
         ## webdriver section
         driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
     driver.implicitly_wait(10)
+    print('--- > browser driver now ready\n')
     return driver
 
 def choosedomaincookie(mycookielist):
@@ -97,3 +98,16 @@ cookielist = extract_cookie(yourdomain)
 print()
 cookie1 = choosedomaincookie(cookielist)
 print('COOKIE = ' + str(cookie1))
+
+## Browse section - only use Chrome or Brave only
+if cookie1['expires'] > 0:
+    driver = browserDriver()
+    urlx = 'https://' + cookie1['domain'] + cookie1['path']
+    try:
+        driver.add_cookie(cookie1)
+        driver.get(urlx)
+    except:
+        print('COOKIE ERROR - INVALID COOKIE DOMAIN')
+        driver.quit()
+else:
+    print('Domain has no cookie or cookie has expired')
