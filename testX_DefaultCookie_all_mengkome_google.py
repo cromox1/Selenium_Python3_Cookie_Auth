@@ -27,13 +27,13 @@ def extract_cookie(domainname=""):
                 #             'httpOnly': False, 'HostOnly': False, 'sameSite': 'None', 'secure': c.secure and True or False}
                 cookie = c.__dict__
                 if len(cookies) == 1:
-                    print('COOKIE [ ' + domainname + ' / ' + str(
+                    print('COOKIE [ ' + str(cookie['domain']) + ' / ' + str(
                         time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' ] = ' + str(
                         cookie))
                     cookiex.append(cookie)
                 else:
                     if int(cookie['expires']) >= int(time.time()):
-                        print(str(i) + ') COOKIE [ ' + domainname + ' / ' + str(
+                        print(str(i) + ') COOKIE [ ' + str(cookie['domain']) + ' / ' + str(
                             time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' ] = ' + str(cookie))
                         cookiex.append(cookie)
                         i = i + 1

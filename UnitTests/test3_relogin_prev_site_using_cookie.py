@@ -23,7 +23,7 @@ def extract_cookie(domainname=""):
                 i = i + 1
         else:
             print('COOKIE [ all_domain ] = NONE')
-        cookielist = [{'domain': 'None', 'expires': 0}]
+        cookielist = [{'domain': 'None', 'expires': 0, 'secure': 0}]
     else:
         if len(domaincookies) >= 1:
             i = 1
@@ -48,7 +48,7 @@ def extract_cookie(domainname=""):
                         i = i + 1
         else:
             print('COOKIE [ ' + domainname + ' ] = NONE')
-            cookielist = [{'domain': 'None', 'expires': 0}]
+            cookielist = [{'domain': 'None', 'expires': 0, 'secure': 0}]
     return cookielist
 
 def browserDriver(browser='chrome'):
@@ -87,7 +87,7 @@ def browserDriver(browser='chrome'):
     return driver
 
 def choosedomaincookie(cookielist):
-    cookie = {'domain': 'None', 'expires': 0}
+    cookie = {'domain': 'None', 'expires': 0, 'secure': 0}
     if len(cookielist) == 1:
         cookie = cookielist[0]
     else:
