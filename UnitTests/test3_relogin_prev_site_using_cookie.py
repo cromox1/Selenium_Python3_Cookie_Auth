@@ -70,7 +70,13 @@ def browserDriver(browser='chrome'):
         chrome_options.binary_location = brave_exe
         driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
     else:
-        chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        from platform import system as osname
+        if (osname() == 'Windows'):
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        elif (osname() == 'Linux'):
+            chromedriverpath = '/opt/google/chromedriver/chromedriver'
+        else:
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
         chrome_options = Options()
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument("--disable-web-security")

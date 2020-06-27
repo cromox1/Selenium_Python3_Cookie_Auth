@@ -130,6 +130,3 @@ class BasePage(SeleniumDriver):
         self.log.info("HistoryDate ( " + str(int(historyepoch)) + " / " + str(historydate) + " ) < CurrentDate ( " +
                       str(int(currentepoch)) + " / " + str(currentdate) + " )")
         return int(historyepoch) < int(currentepoch)
-
-
-
