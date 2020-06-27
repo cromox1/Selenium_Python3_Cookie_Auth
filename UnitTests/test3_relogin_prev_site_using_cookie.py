@@ -8,9 +8,10 @@ WORK FOR BELOW WEBSITES (AT THE MOMENT):
 '''
 import browser_cookie3
 import time
+import glob, os
 
-def extract_cookie(domainname=""):
-    domaincookies = browser_cookie3.chrome(domain_name=domainname)
+def extract_cookie(cookie_file=None, domainname=""):
+    domaincookies = browser_cookie3.chrome(cookie_file=cookie_file, domain_name=domainname)
     cookielist = []
     if domainname == "":
         print()
@@ -87,7 +88,7 @@ def browserDriver(browser='chrome'):
     return driver
 
 def choosedomaincookie(cookielist):
-    cookie = {'domain': 'None', 'expires': 0, 'secure': 0}
+    cookie = {'domain': 'None', 'expires': 0, 'secure': 1}
     if len(cookielist) == 1:
         cookie = cookielist[0]
     else:
@@ -105,7 +106,15 @@ print()
 print('\n-- > > Specific Domainname ---- \n')
 yourdomain = input('Your domainname = ')
 print('\n  -- > domainname = ' + yourdomain + '\n')
-cookielist = extract_cookie(yourdomain)
+cookielist = []
+brave_cookiefile = glob.glob(os.path.join(os.getenv('APPDATA', ''), '..\Local\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cookies'))[0]
+print('BRAVE_COOKIEFILE = ' + str(brave_cookiefile))
+chrome_cookiefile = glob.glob(os.path.join(os.getenv('APPDATA', ''), '..\Local\\Google\\Chrome\\User Data\\Default\\Cookies'))[0]
+print('CHROME_COOKIEFILE = ' + str(chrome_cookiefile))
+# for cfile in [str(chrome_cookiefile), str(brave_cookiefile)]:
+for cfile in [str(chrome_cookiefile)]:
+    cookielist = cookielist + extract_cookie(cfile, yourdomain)
+# print('COOKIELIST 1 = ' + str(cookielist))
 print()
 cookie1 = choosedomaincookie(cookielist)
 if cookie1['secure'] == 0:
@@ -125,9 +134,22 @@ if cookie1['expires'] > 0:
         print('COOKIE = ' + str(cookie1))
         driver.add_cookie(cookie1)
         driver.get(urlx)
+        url1 = driver.current_url
+        print('ULR1 = ' + str(url1))
         # then you can do whatever you want to do here
+        # to check wheter login or not
+        time.sleep(10)
+        url2 = driver.current_url
+        print('ULR2 = ' + str(url2))
+        if url2 != url1:
+            print('--- > SUCCESS !!!')
+        else:
+            print('--- > FAILED !!!')
+            driver.quit()
     except Exception as e:
         print('  Error -- > ' + e.__str__())
         driver.quit()
+elif cookie1['expires'] == 0 and cookie1['secure'] == True:
+    print()
 else:
     print('Domain has no cookie or cookie has expired')
