@@ -69,10 +69,14 @@ class P01LoginLogoutCookie(BasePage):
     def gotosite(self, URL):
         return self.driver.get(URL)
 
+    def closeBrowserPage(self):
+        return self.driver.close()
+
     def addcookietosite(self, cookie):
         self.driver.add_cookie(cookie)
 
     def returnCookies(self):
+        print('COOKIES = ' + str(self.driver.get_cookies()))
         return self.driver.get_cookies()
 
     def returnDomainFrURL(self, url):

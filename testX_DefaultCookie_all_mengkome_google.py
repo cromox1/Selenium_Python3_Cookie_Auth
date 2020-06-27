@@ -4,6 +4,7 @@ import time
 def extract_cookie(domainname=""):
     # cookies = browser_cookie3.chrome(domain_name=urlx, cookie_file='C:/Users/cromox/Desktop/newselenium/Selenium/MengKome/chrome-data/Default/Cookies')
     cookies = browser_cookie3.chrome(domain_name=domainname)
+    cookiex = []
     if domainname == "":
         print()
         if len(cookies) >= 1:
@@ -15,27 +16,31 @@ def extract_cookie(domainname=""):
                 i = i + 1
         else:
             print('COOKIE [ all_domain ] = NONE')
-        cookie = None
+        cookiex = ['None']
     else:
         if len(cookies) >= 1:
-            cookie = {}
+            # cookie = {}
+            i = 1
             for c in cookies:
-                # cookie = {'domain': c.domain, 'name': c.name, 'value': c.value, 'secure': c.secure and True or False}
-                cookie = {'domain': c.domain,
-                            'name': c.name,
-                            'value': c.value,
-                            'expiry': c.expires,
-                            'path': c.path,
-                            'httpOnly': False,
-                            'HostOnly': False,
-                            'sameSite': 'None',
-                            'secure': c.secure and True or False}
-            print('COOKIE [ ' + domainname + ' / ' + str(
-                time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(cookie['expiry']))) + ' ] = ' + str(cookie))
+                # OLD STYLE
+                # cookie = {'domain': c.domain, 'name': c.name, 'value': c.value, 'expiry': c.expires, 'path': c.path,
+                #             'httpOnly': False, 'HostOnly': False, 'sameSite': 'None', 'secure': c.secure and True or False}
+                cookie = c.__dict__
+                if len(cookies) == 1:
+                    print('COOKIE [ ' + str(cookie['domain']) + ' / ' + str(
+                        time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' ] = ' + str(
+                        cookie))
+                    cookiex.append(cookie)
+                else:
+                    if int(cookie['expires']) >= int(time.time()):
+                        print(str(i) + ') COOKIE [ ' + str(cookie['domain']) + ' / ' + str(
+                            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(cookie['expires'])))) + ' ] = ' + str(cookie))
+                        cookiex.append(cookie)
+                        i = i + 1
         else:
             print('COOKIE [ ' + domainname + ' ] = NONE')
-            cookie = None
-    return cookie
+            cookiex = ['None']
+    return cookiex
 
 # 1) ALL COOKIES
 extract_cookie()
@@ -50,5 +55,13 @@ print('URLX = ' + urlx)
 extract_cookie(urlx)
 
 # 3) google COOKIES
-print('\n-- > > URL .google.com ---- ')
-extract_cookie('.google.com')
+# print('\n-- > > URL .google.com ---- ')
+# extract_cookie('.google.com')
+
+# 4) specific domain
+print()
+print('\n-- > > Specific Domainname ---- \n')
+yourdomain = input('Your domainname = ')
+print('\n  -- > domainname = ' + yourdomain + '\n')
+extract_cookie(yourdomain)
+

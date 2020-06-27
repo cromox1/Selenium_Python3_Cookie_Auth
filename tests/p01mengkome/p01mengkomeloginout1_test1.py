@@ -135,5 +135,4 @@ class P01MengkomeLoginLogoutTests(unittest.TestCase):
     def tearDown(self):
         print('CURRENT URL = ' + str(self.mengkomepage.returnCurrentURL()))
         print('\n--- >> TEARDOWN')
-
-        # self.mengkomepage.driver.close()
+        # self.mengkomepage.closepage()

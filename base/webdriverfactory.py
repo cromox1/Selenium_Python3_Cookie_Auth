@@ -37,9 +37,8 @@ class WebDriverFactory():
         Returns:
             'WebDriver Instance'
         """
-
+        driver_version = 'unknown'
         driver_name = 'unknown'
-
         if self.browser == "iexplorer" or self.browser == "ie" or self.browser == "IE":
             # Set IE driver
             iedriverserver = r'C:\tools\Python36\Scripts\IEDriverServer_x64_2.42.0.exe'
@@ -55,9 +54,9 @@ class WebDriverFactory():
             from selenium.webdriver.common import desired_capabilities as operacapabilities
             from selenium.webdriver.opera import options as operaoptions
             # OperaDriver - win64 2.36 - https://github.com/operasoftware/operachromiumdriver/releases
-            _operaDriverLoc = r'C:\tools\Python36\Scripts\operadriver_win64_2.36.exe'
+            _operaDriverLoc = r'C:\tools\operadriver\operadriver.exe'
             # Opera browser
-            _operaInstDir = r'C:\Program Files\Opera\\'
+            _operaInstDir = r'C:\tools\Opera\\'
             listOperaDir = listdir(_operaInstDir)
             listOperaVer = [char for char in listOperaDir if char[0].isdigit() and char[-1].isdigit()]
             # listOperaVer.sort(key=lambda version: [int(ver) for ver in version.split('.')])
@@ -73,7 +72,6 @@ class WebDriverFactory():
             driver_version = _operacurrentversion
         elif self.browser == "firefox" or self.browser == "ff":
             driver = webdriver.Firefox()
-            # strver = 'browserVersion'
         elif self.browser == "headless" or self.browser == "nobrowser" or self.browser == "virtual":
             # This is for running without open Browser UI display - good for Jenkins
             chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
@@ -88,7 +86,7 @@ class WebDriverFactory():
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
         elif self.browser == 'brave':
             brave_exe = r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
-            chromedriverpath = r'C:\tools\chromedriver\chromedriver_v81.exe'
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument('--ignore-certificate-errors')
             chrome_options.add_argument("--disable-web-security")
@@ -101,6 +99,7 @@ class WebDriverFactory():
             chrome_options.binary_location = brave_exe
             ## webdriver section
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
+            driver_name = 'brave'
         else:
             # Set chrome driver
             # self.browser == "chrome":
@@ -122,25 +121,24 @@ class WebDriverFactory():
             driver = webdriver.Chrome(chromedriverpath, options=chrome_options)
             #driver.set_window_size(1440, 900)
 
-        # dah jadikan default browser = chrome
-        # else:
-        #    driver = webdriver.Firefox()
-        #    strver = 'browserVersion'
-
         # Setting Driver Implicit Time out for An Element
         driver.implicitly_wait(10)
-
-        # Maximize the window
-        if driver.name == 'chrome' and driver_name == 'unknown':
-            driver.maximize_window()
-
         # Loading browser with App URL
         driver.get(baseURL)
 
-        try:
-            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['version']) # Python 3.7 and below
-        except:
-            print('Browser version ( ' + driver.name + ' ) = ' + driver.capabilities['browserVersion']) # Python 3.8 & above
-        print()
+        if driver_name == 'unknown':
+            try:
+                driver_name = driver.name
+            except:
+                driver_name = 'unknown'
+        if driver_name == 'chrome':
+            driver.maximize_window()  # Maximize the window for chrome
 
+        if driver_version == 'unknown':
+            try:
+                driver_version = str(driver.capabilities['version']) # Python 3.7 and below
+            except:
+                driver_version = str(driver.capabilities['browserVersion']) # Python 3.8 & above
+
+        print('Browser ( ' + str(driver_name) + ' ) version = ' + str(driver_version))
         return driver

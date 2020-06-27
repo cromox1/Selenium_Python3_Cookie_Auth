@@ -1,11 +1,11 @@
 #!/bin/bash
 
 torun="$1"
-
 onbrowser="$2"
 if [ x"$onbrowser" == x ]; then
 # onbrowser='firefox'
 onbrowser='chrome'
+# onbrowser='brave'
 fi
 
 date1=`date +%Y%m%d_%H`
@@ -22,25 +22,29 @@ if [ x"$torun" == xp01 ]||[ x"$torun" == xmengkome ]; then
 
 file1=console_${masani}_p01mainmengkometest.txt
 echo "penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome" > 'logs'/"$file1"
-echo "$ py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py > consoleoutput1.txt 2>&1" >> 'logs/'"$file1"
+echo -n "$ py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py --browser " >> 'logs/'"$file1"
+echo -n "$onbrowser" >> 'logs/'"$file1"
+echo -n " > consoleoutput1.txt 2>&1" >> 'logs/'"$file1"
 echo >> 'logs'/"$file1"
 echo "penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome" >> 'logs'/"$file1"
 echo "$ cat consoleoutput1.txt" >> 'logs'/"$file1"
 echo >> 'logs'/"$file1"
 
-py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py | tee -a 'logs'/"$file1"
+py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py --browser "$onbrowser" | tee -a 'logs'/"$file1"
 
 elif [ x"$torun" == xp01test1 ]||[ x"$torun" == xtest1 ]; then
 
 file1=console_${masani}_p01test1mengkome.txt
 echo "penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome" > 'logs'/"$file1"
-echo "$ py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py::P02MengkomeLoginLogoutTests::test1_login_mengkome_add_cookie_page > consoleoutput1.txt 2>&1" >> 'logs'/"$file1"
+echo -n "$ py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py::P02MengkomeLoginLogoutTests::test1_login_mengkome_add_cookie_page --browser " >> 'logs'/"$file1"
+echo -n "$onbrowser" >> 'logs/'"$file1"
+echo -n " > consoleoutput1.txt 2>&1" >> 'logs/'"$file1"
 echo >> 'logs'/"$file1"
 echo "penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome" >> 'logs'/"$file1"
 echo "$ cat consoleoutput1.txt" >> 'logs'/"$file1"
 echo >> 'logs'/"$file1"
 
-py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py::P02MengkomeLoginLogoutTests::test1_login_mengkome_add_cookie_page | tee -a 'logs'/"$file1"
+py.test.exe -v -s tests/p01mengkome/p01mengkomeloginout1_test1.py::P02MengkomeLoginLogoutTests::test1_login_mengkome_add_cookie_page --browser "$onbrowser" | tee -a 'logs'/"$file1"
 
 else
 
