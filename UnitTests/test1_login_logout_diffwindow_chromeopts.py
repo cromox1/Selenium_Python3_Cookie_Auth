@@ -14,9 +14,14 @@ class TestMengkome1(unittest.TestCase):
     ixi = 0
 
     def setUp(self):
+        from platform import system as osname
+        if (osname() == 'Windows'):
+            self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        elif (osname() == 'Linux'):
+            self.chromedriverpath = '/opt/google/chromedriver/chromedriver'
+        else:
+            self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
         self.base_url = "https://mengkome.pythonanywhere.com/admin/login/"
-        self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
-        # self.driver = webdriver.Chrome(self.chromedriverpath)
         self.chrome_options = Options()
         self.chrome_options.add_argument('--ignore-certificate-errors')
         self.chrome_options.add_argument("--disable-web-security")

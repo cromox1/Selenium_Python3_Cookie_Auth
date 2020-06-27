@@ -14,7 +14,13 @@ class TestMengkome1(unittest.TestCase):
     pswdone = 'qawsed123456'
 
     def setUp(self):
-        chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        from platform import system as osname
+        if (osname() == 'Windows'):
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        elif (osname() == 'Linux'):
+            chromedriverpath = '/opt/google/chromedriver/chromedriver'
+        else:
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
         self.driver = webdriver.Chrome(chromedriverpath)
         # self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(10)

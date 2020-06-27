@@ -8,9 +8,14 @@ class TestMengkome1(unittest.TestCase):
     kome_url = ''
 
     def setUp(self):
-        chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        from platform import system as osname
+        if (osname() == 'Windows'):
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+        elif (osname() == 'Linux'):
+            chromedriverpath = '/opt/google/chromedriver/chromedriver'
+        else:
+            chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
         self.driver = webdriver.Chrome(chromedriverpath)
-        # self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(10)
         self.base_url = "https://mengkome.pythonanywhere.com/admin/login/"
         self.verificationErrors = []
