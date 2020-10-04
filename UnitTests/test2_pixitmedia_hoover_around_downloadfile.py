@@ -36,7 +36,13 @@ class TestHooverPixitMedia(unittest.TestCase):
             self.driver = webdriver.Chrome(self.chromedriverpath, options=self.chrome_options)
             # pass
         else:
-            self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+            from platform import system as osname
+            if (osname() == 'Windows'):
+                self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
+            elif (osname() == 'Linux'):
+                self.chromedriverpath = '/opt/google/chromedriver/chromedriver'
+            else:
+                self.chromedriverpath = r'C:\tools\chromedriver\chromedriver.exe'
             self.chrome_options = Options()
             self.chrome_options.add_argument('--ignore-certificate-errors')
             self.chrome_options.add_argument("--disable-web-security")

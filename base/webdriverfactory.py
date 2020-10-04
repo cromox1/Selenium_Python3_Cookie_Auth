@@ -142,3 +142,24 @@ class WebDriverFactory():
 
         print('Browser ( ' + str(driver_name) + ' ) version = ' + str(driver_version))
         return driver
+
+    def getDriverTruePathFromOS(self, browser='chrome'):
+        chromedriverexe = ''; chromedriverbin = ''
+        from platform import system as osname
+        if (osname() == 'Windows'):
+            if (browser == 'chrome'):
+                chromedriverexe = r'C:\tools\chromedriver\chromedriver.exe'
+            elif (browser == 'brave'):
+                chromedriverexe = r'C:\tools\chromedriver\chromedriver.exe'
+                brave_exe = r'C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe'
+                chromedriverbin = brave_exe
+        elif (osname() == 'Linux'):
+            if (browser == 'chrome'):
+                chromedriverexe = '/opt/google/chromedriver/chromedriver'
+            else:
+                print('Browser other than Chrome not supported yet')
+        else:
+            print('OS ' + str(osname()) + ' is not support yet')
+            # chromedriverexe = r'C:\tools\chromedriver\chromedriver.exe'
+
+        return chromedriverexe, chromedriverbin

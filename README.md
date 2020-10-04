@@ -75,3 +75,30 @@ To run tests (example) :
 ```bash
 py.test -v -s tests/p01google/p01searchpixitmedia_tests.py --browser "$browser"
 ```
+## 3) (Any website with auth login)
+### https://github.com 
+
+Assignment 3 :
+
+Relogin website using valid cookie that found in the Webbrowser's DB
+
+- Go to main page GitHub https://github.com
+- Login (with test user - username / passwd = xxxx1 / xxxxx2 )
+- Close/Quit browser 
+- Find cookie in the Webbrowser's DB (Chrome, Brave, Opera, Firefox, etc...)
+- Relogin (automatically) GitHub (same page before browser been closed) using Cookie
+- Make sure you're successfully auto login
+- Check some infos inside 
+  - go & click Users button
+  - Close/Quit browser again
+- Relogin again (automatically) using Cookie
+  - go back to home page
+- Logout 
+  - make sure now Cookie is expired or not usable anymore
+
+## 3.1) Basic UnitTest :
+
+To run :
+```bash
+python3 UnitTests/test3_relogin_prev_site_using_cookie.py
+```
