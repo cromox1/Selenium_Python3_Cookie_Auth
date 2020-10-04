@@ -1,0 +1,102 @@
+02/10/2020 03:04:03 PM - P01MengkomeLoginLogoutTests - INFO: === >> test1_login_mengkome_add_cookie_page started
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: expectedURL ( https://mengkome.pythonanywhere.com ) VS currentURL ( https://mengkome.pythonanywhere.com )
+02/10/2020 03:04:09 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Currently At Mengkome Page Verified
+02/10/2020 03:04:09 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- mengkome word Verified
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element found - locator (username) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="06b8326c-a6e8-4eb9-be14-2d61b5c13db2")>
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Clicked on element - locator (username) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element found - locator (username) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="06b8326c-a6e8-4eb9-be14-2d61b5c13db2")>
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Sent data (b'bacaone+4Ac-') on element - locator (username) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element found - locator (password) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="e773275a-c926-4097-9475-9423fe2addf1")>
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Clicked on element - locator (password) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element found - locator (password) + locatorType (name)
+02/10/2020 03:04:09 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="e773275a-c926-4097-9475-9423fe2addf1")>
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Sent data (b'qawsed123456+4Ac-') on element - locator (password) + locatorType (name)
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Actual ( 2 ) >= Expected ( 1 )
+02/10/2020 03:04:11 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Cookies list Verified
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: FutureDate ( 1602857050 / 2020-10-16 15:04:10 ) > CurrentDate ( 1601647451 / 2020-10-02 15:04:11 )
+02/10/2020 03:04:11 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Cookie expiry date Verified
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Text ( mengkome.pythonanywhere.com ) == Expected ( mengkome.pythonanywhere.com )
+02/10/2020 03:04:11 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- test1_login_mengkome_add_cookie_page
+02/10/2020 03:04:11 PM - TestStatus - INFO: Login & cookie Verified passed ### TEST SUCCESSFUL
+02/10/2020 03:04:11 PM - P01MengkomeLoginLogoutTests - INFO: === >> test2_relogin_bycookie_chkinfos started
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: expectedURL ( https://mengkome.pythonanywhere.com ) VS currentURL ( https://mengkome.pythonanywhere.com )
+02/10/2020 03:04:11 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Currently At Mengkome Page Verified
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - DEBUG: In locator condition
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[@id="user-tools"]/strong) + locatorType (xpath)
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="fcc5e4fd-b97c-434a-9425-d48ad97516ea")>
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - DEBUG: Before finding element.text, size = 0
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - DEBUG: After finding element.text, size = 7
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Text is on the element - locator (//*[@id="user-tools"]/strong) + locatorType (xpath)
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: The text = 'PEMBACA'
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[contains(text(), 'Users')]) + locatorType (xpath)
+02/10/2020 03:04:11 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="674bb84f-e738-48af-9e6f-56e3b84ee96d")>
+02/10/2020 03:04:12 PM - P01LoginLogoutCookie - INFO: Clicked on element - locator (//*[contains(text(), 'Users')]) + locatorType (xpath)
+02/10/2020 03:04:12 PM - P01LoginLogoutCookie - INFO: ElementList found - locator (bacaone) + locatorType (link)
+02/10/2020 03:04:12 PM - P01LoginLogoutCookie - INFO: ElementList count = 1
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: In locator condition
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[@class="form-row field-email"]/*/*[@class="readonly"]) + locatorType (xpath)
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="5fcb25ad-b568-4fac-b600-0f8beab75bc6")>
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: Before finding element.text, size = 0
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: After finding element.text, size = 18
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Text is on the element - locator (//*[@class="form-row field-email"]/*/*[@class="readonly"]) + locatorType (xpath)
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: The text = 'xixa05@yahoo.co.uk'
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: In locator condition
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[@class="form-row field-date_joined"]/*/*[@class="readonly"]) + locatorType (xpath)
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="671bda67-e7d1-4e38-a144-ca30570ab637")>
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: Before finding element.text, size = 0
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - DEBUG: After finding element.text, size = 23
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Text is on the element - locator (//*[@class="form-row field-date_joined"]/*/*[@class="readonly"]) + locatorType (xpath)
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: The text = 'Nov. 8, 2018, 2:08 p.m.'
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Actual ( 7 ) >= Expected ( 1 )
+02/10/2020 03:04:13 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Username PEMBACA existance Verified
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: Email ( xixa05@yahoo.co.uk ) in correct email format
+02/10/2020 03:04:13 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Email (format) Verified
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: HistoryDate ( 1541686080 / 2018-11-08 14:08:00 ) < CurrentDate ( 1601647453 / 2020-10-02 15:04:13 )
+02/10/2020 03:04:13 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Date joined Verified
+02/10/2020 03:04:13 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- test2_relogin_bycookie_chkinfos
+02/10/2020 03:04:13 PM - TestStatus - INFO: Relogin by cookie & chk infos Verified passed ### TEST SUCCESSFUL
+02/10/2020 03:04:13 PM - P01MengkomeLoginLogoutTests - INFO: === >> test3_relogin_bycookie_logout started
+02/10/2020 03:04:13 PM - P01LoginLogoutCookie - INFO: expectedURL ( https://mengkome.pythonanywhere.com ) VS currentURL ( https://mengkome.pythonanywhere.com )
+02/10/2020 03:04:13 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Currently At Mengkome Page Verified
+02/10/2020 03:04:14 PM - Util - INFO: Actual Text From Application Web UI --> :: View user | Django site admin
+02/10/2020 03:04:14 PM - Util - INFO: Expected Text From Application Web UI --> :: View user | Django site admin
+02/10/2020 03:04:14 PM - Util - INFO: ### VERIFICATION CONTAINS !!!
+02/10/2020 03:04:14 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- User page title Verified
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[contains(text(), 'View site')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="be16a436-5d94-4626-b824-1f12b2dbfa50")>
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element present - locator (//*[contains(text(), 'View site')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Inside Page Verified
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[contains(text(), 'Log out')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="f2954fcb-ae47-4db9-a873-0c920139130a")>
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Clicked on element - locator (//*[contains(text(), 'Log out')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - DEBUG: In locator condition
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[@id='content']/h1) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="237c4bc7-2268-4add-b410-3ac51504633e")>
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - DEBUG: Before finding element.text, size = 0
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - DEBUG: After finding element.text, size = 10
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Text is on the element - locator (//*[@id='content']/h1) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: The text = 'Logged out'
+02/10/2020 03:04:14 PM - Util - INFO: Actual Text From Application Web UI --> :: Logged out | Django site admin
+02/10/2020 03:04:14 PM - Util - INFO: Expected Text From Application Web UI --> :: Logged out | Django site admin
+02/10/2020 03:04:14 PM - Util - INFO: ### VERIFICATION CONTAINS !!!
+02/10/2020 03:04:14 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Logged out page title Verified
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element found - locator (//*[contains(text(), 'Logged out')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="6d8e44d4-f467-492c-b572-1acc7acffb1e")>
+02/10/2020 03:04:14 PM - P01LoginLogoutCookie - INFO: Element present - locator (//*[contains(text(), 'Logged out')]) + locatorType (xpath)
+02/10/2020 03:04:14 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Logged out element Verified
+02/10/2020 03:04:14 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- test3_relogin_bycookie_logout
+02/10/2020 03:04:14 PM - TestStatus - INFO: Relogin by cookie & then Log-out Verified passed ### TEST SUCCESSFUL
+02/10/2020 03:04:14 PM - P01MengkomeLoginLogoutTests - INFO: === >> test9_relogin_after_logout started
+02/10/2020 03:04:15 PM - Util - INFO: Actual Text From Application Web UI --> :: Log in | Django site admin
+02/10/2020 03:04:15 PM - Util - INFO: Expected Text From Application Web UI --> :: Log in | Django site admin
+02/10/2020 03:04:15 PM - Util - INFO: ### VERIFICATION CONTAINS !!!
+02/10/2020 03:04:15 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Front page / Login title Verified
+02/10/2020 03:04:15 PM - P01LoginLogoutCookie - INFO: Element found - locator (login-form) + locatorType (id)
+02/10/2020 03:04:15 PM - P01LoginLogoutCookie - INFO: Element = <selenium.webdriver.remote.webelement.WebElement (session="e6838a4048de28bb94195cc20b4584e0", element="f27ef5c2-7930-4bd0-b0a9-48d79157b3a0")>
+02/10/2020 03:04:15 PM - P01LoginLogoutCookie - INFO: Element present - locator (login-form) + locatorType (id)
+02/10/2020 03:04:15 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- Login element Verified
+02/10/2020 03:04:15 PM - TestStatus - INFO: ### VERIFICATION SUCCESSFUL -- test9_relogin_after_logout
+02/10/2020 03:04:15 PM - TestStatus - INFO: Relogin by cookie not allowed Verified passed ### TEST SUCCESSFUL

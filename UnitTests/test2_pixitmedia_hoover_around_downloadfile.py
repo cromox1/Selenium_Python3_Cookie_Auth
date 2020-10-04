@@ -51,7 +51,7 @@ class TestHooverPixitMedia(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.base_url = "https://www.google.co.uk"
         self.verificationErrors = []
-        self.tmpfilename = 'tmptest123.pdf'
+        self.tmpfilename = 'tmptest123-' + str(strftime("%Y-%m-%d-%H-%M-%S")) + '.pdf'
 
     def test_one(self):
         driver = self.driver
@@ -59,6 +59,15 @@ class TestHooverPixitMedia(unittest.TestCase):
         if driver.name == 'chrome':
             driver.maximize_window()
         driver.get(self.base_url)
+
+        # new features by chrome incognito mode - pop-up of Agree button which I need to click
+        if driver.find_element_by_css_selector("iframe"):
+            iframe1 = driver.find_elements_by_css_selector("iframe")
+            driver.switch_to.frame(iframe1[0])
+            # driver.find_element_by_xpath("//*[contains(text(),'I agree')]").click()
+            driver.find_element_by_id("introAgreeButton").click()
+            driver.switch_to.default_content()
+
         driver.find_element_by_name('q').click()
         driver.find_element_by_name('q').send_keys("pixitmedia" + Keys.ENTER)
         list_pixitmedia = driver.find_elements_by_xpath("//*[contains(text(),'Pixit Media')]")
@@ -70,6 +79,7 @@ class TestHooverPixitMedia(unittest.TestCase):
         #         element.click()
         # if driver.find_element_by_xpath("//*[contains(text(),'https://www.pixitmedia.com/')]").text == "https://www.pixitmedia.com/":
         #     driver.get("https://www.pixitmedia.com/")
+
         list_pixitmedia[0].click()
         basepixitmediaurl = driver.current_url
         print('PIXITMEDIA URL = ' + str(basepixitmediaurl))
@@ -129,10 +139,10 @@ class TestHooverPixitMedia(unittest.TestCase):
         # All data to send
         name1 = 'Cromox'
         name2 = 'One'
-        email1 = 'bumimanusia@gmail.com'
+        email1 = 'Aarti.Mohan@sophos.com'
         comp1 = 'Ranorexxx'
         phone1 = "07769916425"
-        subject1 = 'Test1'
+        subject1 = 'Test1 at ' + str(current1)
         print('NAME : ' + name1 + ' ' + name2)
         print('EMAIL : ' + email1 + ' / PHONE : ' + phone1)
         print('COMPANY : ' + comp1)
@@ -168,14 +178,16 @@ class TestHooverPixitMedia(unittest.TestCase):
         hoover(driver).move_to_element(element_message).perform()
         element_message.clear()
         current2 = strftime("%Y-%m-%d %H:%M:%S")
-        message1 = "This is a test for Jez \n\nToday is " + str(current2) + \
+        message1 = "This is a test for Jez ( from " + str(email1) + " )\n\nToday is " + str(current2) + \
                    '\nExact testing time : From ' + str(current1) + ' to ' + str(current2) + \
-                   "\nThis Earth of Mankind (Bumi Manusia) -> is it Jez?? " \
-                   "\nI don't think so. Look at the inconsiderate you!!"
-        print('MESSAGE :\n' + str(message1))
+                   "\nThis Earth of Mankind (Bumi Manusia) -> IS IT JEZ?? " \
+                   "\nI don't think so. Look at the INCONSIDERATE you!!"
+        print('MESSAGE :\n\n' + str(message1))
         element_message.send_keys(message1)
         # Half page scroll down
-        driver.execute_script("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
+        print()
+        driver.execute_script("window.scrollTo(0, 850);") #("window.scrollTo(0, " + str(self.displayheight()[1]) + ");")
+        sleep(5)
         driver.find_element_by_name('input_8.1').click()
         element_send = driver.find_element_by_xpath("//*[@value='Send']")
         self.assertIsNotNone(element_send)
@@ -209,9 +221,9 @@ class TestHooverPixitMedia(unittest.TestCase):
         if last_height <= 1800:
             last_height = 1850
         half_height = int(0.5 * last_height)
-        quater_height = int(0.1 * last_height)
-        print('HEIGHT = ' + str(last_height) + ' / 0.5HEIGHT = ' + str(half_height) + ' / 0.1HEIGHT = ' + str(quater_height))
-        return last_height,half_height,quater_height
+        oneten_height = int(0.1 * last_height)
+        # print('HEIGHT = ' + str(last_height) + ' / 0.5HEIGHT = ' + str(half_height) + ' / 0.1HEIGHT = ' + str(oneten_height))
+        return last_height,half_height,oneten_height
 
 if __name__ == "__main__":
     unittest.main()

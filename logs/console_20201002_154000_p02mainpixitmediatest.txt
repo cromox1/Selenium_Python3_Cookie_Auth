@@ -1,0 +1,12 @@
+penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome
+$ py.test.exe -v -s tests/p02pixitmedia/p02pixitmediahoover1_test1.py --browser chrome > consoleoutput1.txt 2>&1
+penggunabiasa@PC-rosli MINGW64 ~/python3_projects/Selenium/MengKome
+$ cat consoleoutput1.txt
+
+============================= test session starts =============================
+platform win32 -- Python 3.8.2, pytest-6.0.1, py-1.9.0, pluggy-0.13.1 -- c:\tools\python38\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\cromox\Desktop\newselenium\Selenium_Python3_Cookie_Auth
+collecting ... collected 0 items
+
+============================ no tests ran in 0.07s ============================
